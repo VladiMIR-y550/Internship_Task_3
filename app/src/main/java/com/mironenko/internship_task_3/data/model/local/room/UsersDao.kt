@@ -14,5 +14,5 @@ interface UsersDao {
     suspend fun getUserDbEntityById(userId: String): UserDbEntity
 
     @Insert(entity = UserDbEntity::class, onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(userDbEntity: UserDbEntity)
+    suspend fun insertAll(userDbEntityList: List<UserDbEntity>)
 }

@@ -5,11 +5,11 @@ import com.mironenko.internship_task_3.base.Interactor
 
 class UserDetailsViewModel(
     interactors: Set<Interactor<UserDetailState, UserDetailAction>>,
-    itemId: String
+    userId: String
 ) :
     BaseViewModel<UserDetailState, UserDetailAction>(
         interactors = interactors,
-        reducer = UserDetailReducer(itemId)
+        reducer = UserDetailReducer(userId)
     ) {
 
     fun getUser() {

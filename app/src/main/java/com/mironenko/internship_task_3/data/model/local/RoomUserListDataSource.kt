@@ -12,7 +12,7 @@ class RoomUserListDataSource(private val usersDao: UsersDao) : UserListLocalData
         return usersDao.getUserDbEntityById(userId)
     }
 
-    override suspend fun saveUserToDataBase(userDbEntity: UserDbEntity) {
-        usersDao.insert(userDbEntity)
+    override suspend fun saveUserList(userDbEntityList: List<UserDbEntity>) {
+        usersDao.insertAll(userDbEntityList)
     }
 }

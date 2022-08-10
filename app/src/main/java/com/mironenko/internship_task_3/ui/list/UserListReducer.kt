@@ -14,7 +14,7 @@ class UserListReducer : Reducer<UserListState, UserListAction> {
             is UserListAction.UsersLoaded -> state.copy(
                 usersList = action.users
             )
-            is UserListAction.Error -> state        //если пришёл action.error мы должны загрузить из БД
+            is UserListAction.Error -> state
         }
     }
 }

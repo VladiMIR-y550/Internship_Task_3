@@ -8,5 +8,5 @@ interface UserListLocalDataSource {
 
     suspend fun getUserDbEntityById(userId: String): UserDbEntity
 
-    suspend fun saveUserToDataBase(userDbEntity: UserDbEntity)
+    suspend fun saveUserList(userDbEntityList: List<UserDbEntity>)
 }

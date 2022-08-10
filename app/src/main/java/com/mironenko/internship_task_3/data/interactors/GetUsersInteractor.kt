@@ -6,12 +6,14 @@ import com.mironenko.internship_task_3.data.mapper.UserMapper
 import com.mironenko.internship_task_3.ui.list.UserListAction
 import com.mironenko.internship_task_3.ui.list.UserListState
 
-class GetUsersInteractor(private val repository: UsersRepository) :
+class GetUsersInteractor(
+    private val repository: UsersRepository,
+    private val mapper: UserMapper
+) :
     Interactor<UserListState, UserListAction> {
 
     override suspend fun invoke(state: UserListState, action: UserListAction): UserListAction {
         return if (action is UserListAction.LoadUsers) {
-            val mapper = UserMapper()
             UserListAction.UsersLoaded(mapper.fromEntityList(repository.getUserList()))
         } else {
             UserListAction.Error(IllegalArgumentException("Wrong action: $action"))

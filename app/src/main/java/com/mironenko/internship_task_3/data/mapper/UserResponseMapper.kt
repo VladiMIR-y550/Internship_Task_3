@@ -1,10 +1,9 @@
 package com.mironenko.internship_task_3.data.mapper
 
-import android.annotation.SuppressLint
 import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
 import com.mironenko.internship_task_3.data.model.remote.Id
 import com.mironenko.internship_task_3.data.model.remote.UserResponse
-import java.text.SimpleDateFormat
+import com.mironenko.internship_task_3.util.DateFormatter
 import java.util.*
 
 class UserResponseMapper : EntityMapper<UserResponse, UserDbEntity> {
@@ -55,10 +54,8 @@ class UserResponseMapper : EntityMapper<UserResponse, UserDbEntity> {
 
     private fun concatId(id: Id): String = "${id.name} ${id.value}"
 
-    @SuppressLint("SimpleDateFormat")
     private fun formatDate(date: String?): String {
-        val dateFromString =
-            date?.let { SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(it) } as Date
-        return SimpleDateFormat("d MMMM yyyy H:mm").format(dateFromString)
+        val dateFromString = date?.let { DateFormatter.inputFormat.parse(it) } as Date
+        return DateFormatter.outputFormat.format(dateFromString)
     }
 }

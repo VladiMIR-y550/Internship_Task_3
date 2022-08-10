@@ -6,8 +6,10 @@ import com.mironenko.internship_task_3.data.mapper.UserMapper
 import com.mironenko.internship_task_3.ui.details.UserDetailAction
 import com.mironenko.internship_task_3.ui.details.UserDetailState
 
-class GetUserByIdInteractor(private val repository: UsersRepository) :
-
+class GetUserByIdInteractor(
+    private val repository: UsersRepository,
+    private val mapper: UserMapper
+) :
     Interactor<UserDetailState, UserDetailAction> {
     override suspend fun invoke(
         state: UserDetailState,
@@ -15,7 +17,6 @@ class GetUserByIdInteractor(private val repository: UsersRepository) :
     ): UserDetailAction {
         return if (action is UserDetailAction.LoadUser) {
             try {
-                val mapper = UserMapper()
                 val user = mapper.mapFromEntity(repository.getUserById(state.userId))
                 UserDetailAction.UserLoaded(user = user)
             } catch (e: Exception) {

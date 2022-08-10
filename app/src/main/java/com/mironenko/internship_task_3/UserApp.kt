@@ -3,8 +3,9 @@ package com.mironenko.internship_task_3
 import android.app.Application
 import android.content.Context
 import androidx.room.Room
-import com.mironenko.internship_task_3.data.model.remote.ApiUserService
 import com.mironenko.internship_task_3.data.model.local.room.UsersRoomDatabase
+import com.mironenko.internship_task_3.data.model.remote.ApiUserService
+import com.mironenko.internship_task_3.util.USERS_ROOM_DATABASE
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -53,7 +54,7 @@ class UserApp : Application() {
         return Room.databaseBuilder(
             applicationContext,
             UsersRoomDatabase::class.java,
-            "users_room_database"
+            USERS_ROOM_DATABASE
         ).build()
     }
 }

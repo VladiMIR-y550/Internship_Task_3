@@ -12,18 +12,11 @@ class UsersListRepository(
 
     override suspend fun getUserList(): List<UserDbEntity> {
         val mapper = UserResponseMapper()
-        val listUser = mutableListOf<UserDbEntity>()
-
-        val response = remoteDataSource.downloadUserList()
-
-        return if (response.isSuccessful) {
-            response.body()?.results?.forEach {
-                val userDbEntity = mapper.mapFromEntity(it)
-                localDataSource.saveUserToDataBase(userDbEntity)
-                listUser.add(userDbEntity)
-            }
-            listUser
-        } else {
+        return try {
+            val response = mapper.fromEntityList(remoteDataSource.downloadUserList().results)
+            localDataSource.saveUserList(response)
+            response
+        } catch (e: Exception) {
             localDataSource.getAllUsers()
         }
     }
