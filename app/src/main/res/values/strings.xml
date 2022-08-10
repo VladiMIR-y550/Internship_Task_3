@@ -1,3 +1,31 @@
 <resources>
     <string name="app_name">Internship_Task_3</string>
+    <string name="name">Name:</string>
+    <string name="gender">Gender:</string>
+    <string name="location">Location:</string>
+    <string name="registered">Registered date:</string>
+    <string name="at_age">at age:</string>
+    <string name="email">Email:</string>
+    <string name="phone">Phone:</string>
+    <string name="cell">Cell:</string>
+    <string name="city">City:</string>
+    <string name="state">State:</string>
+    <string name="country">Country:</string>
+    <string name="postcode">Postcode:</string>
+    <string name="nationality">Nationality:</string>
+    <string name="user_name">user_name</string>
+    <string name="gender_field">gender_field</string>
+    <string name="dob_field">dob_field</string>
+    <string name="nationality_field">nationality_field</string>
+    <string name="phone_field">phone_field</string>
+    <string name="email_field">email_field</string>
+    <string name="cell_field">cell_field</string>
+    <string name="city_field">city_field</string>
+    <string name="state_field">state_field</string>
+    <string name="country_field">country_field</string>
+    <string name="postcode_field">postcode_field</string>
+    <string name="registered_field">registered_field</string>
+    <string name="at_age_field">at_age_field</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="account_photo">Account photo</string>
 </resources>
