@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.mironenko.internship_task_3.apiUserService
 import com.mironenko.internship_task_3.data.UsersListRepository
 import com.mironenko.internship_task_3.data.UsersRepository
+import com.mironenko.internship_task_3.data.mapper.UserMapper
+import com.mironenko.internship_task_3.data.mapper.UserResponseMapper
 import com.mironenko.internship_task_3.data.model.local.RoomUserListDataSource
 import com.mironenko.internship_task_3.data.model.local.UserListLocalDataSource
 import com.mironenko.internship_task_3.data.model.remote.RetrofitUserListDataSource
@@ -16,6 +18,8 @@ abstract class BaseViewModelFactory(application: Application) : ViewModelProvide
         RoomUserListDataSource(application.usersRoomDataBase.getUsersListDao())
     private val remoteDataSource: UserListRemoteDataSource =
         RetrofitUserListDataSource(application.apiUserService)
+    private val responseMapper = UserResponseMapper()
+    protected val userMapper = UserMapper()
     protected val repository: UsersRepository =
-        UsersListRepository(remoteDataSource, localDataSource)
+        UsersListRepository(remoteDataSource, localDataSource, responseMapper)
 }

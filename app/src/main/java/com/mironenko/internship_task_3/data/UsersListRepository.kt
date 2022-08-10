@@ -7,11 +7,12 @@ import com.mironenko.internship_task_3.data.model.remote.UserListRemoteDataSourc
 
 class UsersListRepository(
     private val remoteDataSource: UserListRemoteDataSource,
-    private val localDataSource: UserListLocalDataSource
+    private val localDataSource: UserListLocalDataSource,
+    private val mapper: UserResponseMapper
 ) : UsersRepository {
 
     override suspend fun getUserList(): List<UserDbEntity> {
-        val mapper = UserResponseMapper()
+
         return try {
             val response = mapper.fromEntityList(remoteDataSource.downloadUserList().results)
             localDataSource.saveUserList(response)
