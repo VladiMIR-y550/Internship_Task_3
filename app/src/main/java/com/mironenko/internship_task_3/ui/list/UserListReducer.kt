@@ -8,11 +8,11 @@ class UserListReducer : Reducer<UserListState, UserListAction> {
     )
 
     override fun reduce(state: UserListState, action: UserListAction): UserListState {
-        return when(action) {
+        return when (action) {
             UserListAction.None -> state
             UserListAction.LoadUsers -> state
             is UserListAction.UsersLoaded -> state.copy(
-                usersList = action.users
+                usersList = state.usersList + action.users
             )
             is UserListAction.Error -> state
         }

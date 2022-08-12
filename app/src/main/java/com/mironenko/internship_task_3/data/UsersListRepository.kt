@@ -11,10 +11,15 @@ class UsersListRepository(
     private val mapper: UserResponseMapper
 ) : UsersRepository {
 
+    private var isFirstStart: Boolean = true
+
     override suspend fun getUserList(): List<UserDbEntity> {
 
         return try {
             val response = mapper.fromEntityList(remoteDataSource.downloadUserList().results)
+            if (isFirstStart) {
+                localDataSource.clearAll()
+            }
             localDataSource.saveUserList(response)
             response
         } catch (e: Exception) {

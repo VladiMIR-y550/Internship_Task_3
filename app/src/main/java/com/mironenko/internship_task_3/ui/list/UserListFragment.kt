@@ -27,9 +27,11 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>() {
         }
 
     private val userAdapter by lazy {
-        UserListAdapter {
+        UserListAdapter({
             navigateToDetails(it)
-        }
+        }, {
+            viewModel.loadUsers()
+        })
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

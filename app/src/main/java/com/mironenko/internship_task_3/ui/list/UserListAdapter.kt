@@ -8,8 +8,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mironenko.internship_task_3.data.User
 import com.mironenko.internship_task_3.databinding.LayoutListItemBinding
 
+private const val PREFETCH_DISTANCE = 15
+
 class UserListAdapter(
-    private val onItemClicked: (User) -> Unit
+    private val onItemClicked: (User) -> Unit,
+    private val loadNextPage: () -> Unit
 ) : ListAdapter<User, UserListAdapter.UserViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -20,6 +23,9 @@ class UserListAdapter(
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.bind(currentList[position], onItemClicked)
+        if (position == currentList.size - PREFETCH_DISTANCE) {
+            loadNextPage()
+        }
     }
 
     inner class UserViewHolder(

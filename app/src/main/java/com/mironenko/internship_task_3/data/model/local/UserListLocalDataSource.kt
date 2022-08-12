@@ -9,4 +9,6 @@ interface UserListLocalDataSource {
     suspend fun getUserDbEntityById(userId: String): UserDbEntity
 
     suspend fun saveUserList(userDbEntityList: List<UserDbEntity>)
+
+    suspend fun clearAll()
 }

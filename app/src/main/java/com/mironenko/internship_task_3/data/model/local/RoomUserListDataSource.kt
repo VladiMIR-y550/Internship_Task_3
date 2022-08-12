@@ -15,4 +15,8 @@ class RoomUserListDataSource(private val usersDao: UsersDao) : UserListLocalData
     override suspend fun saveUserList(userDbEntityList: List<UserDbEntity>) {
         usersDao.insertAll(userDbEntityList)
     }
+
+    override suspend fun clearAll() {
+        usersDao.clearAll()
+    }
 }
