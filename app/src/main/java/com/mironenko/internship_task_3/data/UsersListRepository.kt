@@ -1,5 +1,6 @@
 package com.mironenko.internship_task_3.data
 
+import android.util.Log
 import com.mironenko.internship_task_3.data.mapper.UserResponseMapper
 import com.mironenko.internship_task_3.data.model.local.UserListLocalDataSource
 import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
@@ -19,6 +20,7 @@ class UsersListRepository(
             val response = mapper.fromEntityList(remoteDataSource.downloadUserList().results)
             if (isFirstStart) {
                 localDataSource.clearAll()
+                isFirstStart = false
             }
             localDataSource.saveUserList(response)
             response
