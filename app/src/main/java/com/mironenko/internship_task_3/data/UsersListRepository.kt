@@ -1,6 +1,5 @@
 package com.mironenko.internship_task_3.data
 
-import android.util.Log
 import com.mironenko.internship_task_3.data.mapper.UserResponseMapper
 import com.mironenko.internship_task_3.data.model.local.UserListLocalDataSource
 import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
