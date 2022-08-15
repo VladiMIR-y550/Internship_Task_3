@@ -21,5 +21,9 @@ abstract class BaseViewModelFactory(application: Application) : ViewModelProvide
     private val responseMapper = UserResponseMapper()
     protected val userMapper = UserMapper()
     protected val repository: UsersRepository =
-        UsersListRepository(remoteDataSource, localDataSource, responseMapper)
+        UsersListRepository.getInstance(
+            remoteDataSource = remoteDataSource,
+            localDataSource = localDataSource,
+            mapper = responseMapper
+        )!!
 }

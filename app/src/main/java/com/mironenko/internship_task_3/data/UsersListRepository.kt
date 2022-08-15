@@ -5,11 +5,34 @@ import com.mironenko.internship_task_3.data.model.local.UserListLocalDataSource
 import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
 import com.mironenko.internship_task_3.data.model.remote.UserListRemoteDataSource
 
-class UsersListRepository(
-    private val remoteDataSource: UserListRemoteDataSource,
-    private val localDataSource: UserListLocalDataSource,
-    private val mapper: UserResponseMapper
+class UsersListRepository private constructor(
+    private var remoteDataSource: UserListRemoteDataSource,
+    private var localDataSource: UserListLocalDataSource,
+    private var mapper: UserResponseMapper
 ) : UsersRepository {
+
+    companion object {
+        private var instance: UsersListRepository? = null
+
+        fun getInstance(
+            remoteDataSource: UserListRemoteDataSource,
+            localDataSource: UserListLocalDataSource,
+            mapper: UserResponseMapper
+        ): UsersListRepository? {
+            if (instance == null) {
+                synchronized(UsersListRepository::class.java) {
+                    if (instance == null) {
+                        instance = UsersListRepository(
+                            remoteDataSource = remoteDataSource,
+                            localDataSource = localDataSource,
+                            mapper = mapper
+                        )
+                    }
+                }
+            }
+            return instance
+        }
+    }
 
     private var isFirstStart: Boolean = true
 
