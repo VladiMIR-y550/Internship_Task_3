@@ -9,7 +9,7 @@ class UserDetailsViewModelFactory(application: Application, private val userId: 
     BaseViewModelFactory(application) {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return UserDetailsViewModel(
-            setOf(GetUserByIdInteractor(repository = repository, mapper = userMapper)),
+            setOf(GetUserByIdInteractor(repository = repository)),
             userId = userId
         ) as T
     }

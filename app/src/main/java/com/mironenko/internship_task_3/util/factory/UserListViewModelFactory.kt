@@ -9,7 +9,7 @@ class UserListViewModelFactory(application: Application) : BaseViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return UserListViewModel(
             setOf(
-                GetUsersInteractor(repository = repository, mapper = userMapper)
+                GetUsersInteractor(repository = repository)
             )
         ) as T
     }

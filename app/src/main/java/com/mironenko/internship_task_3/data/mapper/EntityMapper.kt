@@ -1,8 +1,10 @@
 package com.mironenko.internship_task_3.data.mapper
 
-interface EntityMapper<Entity, Model> {
+interface EntityMapper<ResponseEntity, DbEntity, ModelEntity> {
 
-    fun mapFromEntity(entity: Entity): Model
+    fun responseEntityToDbEntity(responseEntity: ResponseEntity): DbEntity
+    fun dbEntityToUser(dbEntity: DbEntity): ModelEntity
 
-    fun fromEntityList(initial: List<Entity>): List<Model>
+    fun fromDbEntityList(initial: List<DbEntity>): List<ModelEntity>
+    fun fromResponseEntityList(initial: List<ResponseEntity>): List<DbEntity>
 }
