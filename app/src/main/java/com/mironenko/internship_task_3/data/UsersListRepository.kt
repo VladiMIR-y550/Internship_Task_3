@@ -1,13 +1,15 @@
 package com.mironenko.internship_task_3.data
 
-import com.mironenko.internship_task_3.data.mapper.UsersMapper
+import com.mironenko.internship_task_3.data.mapper.EntityMapper
 import com.mironenko.internship_task_3.data.model.local.UserListLocalDataSource
+import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
 import com.mironenko.internship_task_3.data.model.remote.UserListRemoteDataSource
+import com.mironenko.internship_task_3.data.model.remote.UserResponse
 
 class UsersListRepository private constructor(
     private var remoteDataSource: UserListRemoteDataSource,
     private var localDataSource: UserListLocalDataSource,
-    private var mapper: UsersMapper
+    private var mapper: EntityMapper<UserResponse, UserDbEntity, User>
 ) : UsersRepository {
 
     private var isFirstStart: Boolean = true
@@ -38,7 +40,7 @@ class UsersListRepository private constructor(
         fun getInstance(
             remoteDataSource: UserListRemoteDataSource,
             localDataSource: UserListLocalDataSource,
-            mapper: UsersMapper
+            mapper: EntityMapper<UserResponse, UserDbEntity, User>
         ): UsersListRepository? {
             if (instance == null) {
                 synchronized(UsersListRepository::class.java) {
