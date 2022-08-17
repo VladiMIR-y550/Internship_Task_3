@@ -1,5 +1,6 @@
 package com.mironenko.internship_task_3.ui.list
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,13 +14,14 @@ import com.mironenko.internship_task_3.data.User
 import com.mironenko.internship_task_3.databinding.FragmentUserListBinding
 import com.mironenko.internship_task_3.ui.details.UserDetailsFragment
 import com.mironenko.internship_task_3.util.factory.UserListViewModelFactory
+import javax.inject.Inject
 
 class UserListFragment : BaseFragment<FragmentUserListBinding>() {
-    private val viewModel: UserListViewModel by viewModels {
-        UserListViewModelFactory(
-            application = requireContext().applicationContext as UserApp
-        )
-    }
+
+    @Inject
+    lateinit var factory: UserListViewModelFactory
+
+    private val viewModel: UserListViewModel by viewModels { factory }
 
     override val viewBindingProvider: (LayoutInflater, ViewGroup?) -> FragmentUserListBinding =
         { inflater, container ->
@@ -32,6 +34,11 @@ class UserListFragment : BaseFragment<FragmentUserListBinding>() {
         }, {
             viewModel.loadUsers()
         })
+    }
+
+    override fun onAttach(context: Context) {
+        UserApp.appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

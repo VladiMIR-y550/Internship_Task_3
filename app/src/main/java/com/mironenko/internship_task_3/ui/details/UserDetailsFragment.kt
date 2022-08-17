@@ -1,5 +1,6 @@
 package com.mironenko.internship_task_3.ui.details
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,15 @@ import com.mironenko.internship_task_3.base.BaseFragment
 import com.mironenko.internship_task_3.databinding.FragmentUserDetailsBinding
 import com.mironenko.internship_task_3.util.ARG_USER_ID
 import com.mironenko.internship_task_3.util.factory.UserDetailsViewModelFactory
+import javax.inject.Inject
 
 class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
+
+    @Inject
+    lateinit var factory: UserDetailsViewModelFactory.Factory
+
     private val viewModel: UserDetailsViewModel by viewModels {
-        UserDetailsViewModelFactory(
-            requireContext().applicationContext as UserApp,
-            userId
-        )
+        factory.create(userId = userId)
     }
 
     override val viewBindingProvider: (LayoutInflater, ViewGroup?) -> FragmentUserDetailsBinding =
@@ -28,6 +31,11 @@ class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
 
     private val userId by lazy {
         arguments?.getString(ARG_USER_ID, "") ?: ""
+    }
+
+    override fun onAttach(context: Context) {
+        UserApp.appComponent.inject(this)
+        super.onAttach(context)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -6,8 +6,9 @@ import com.mironenko.internship_task_3.data.model.remote.Id
 import com.mironenko.internship_task_3.data.model.remote.UserResponse
 import com.mironenko.internship_task_3.util.DateFormatter
 import java.util.*
+import javax.inject.Inject
 
-class UsersMapper : EntityMapper<UserResponse, UserDbEntity, User> {
+class UsersMapper @Inject constructor() : EntityMapper<UserResponse, UserDbEntity, User> {
     override fun dbEntityToUser(dbEntity: UserDbEntity): User {
         return User(
             id = dbEntity.id,
