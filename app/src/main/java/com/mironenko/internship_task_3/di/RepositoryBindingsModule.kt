@@ -12,21 +12,18 @@ import dagger.Module
 @Module
 interface RepositoryBindingsModule {
 
-    @Suppress("FunctionName")
     @Binds
-    fun bindRoomUserListDataSource_to_UserListLocalDataSource(
+    fun bindRoomUserListDataSourceToUserListLocalDataSource(
         roomUserListDataSource: RoomUserListDataSource
     ): UserListLocalDataSource
 
-    @Suppress("FunctionName")
     @Binds
-    fun bindRetrofitUserListDataSource_to_UserListRemoteDataSource(
+    fun bindRetrofitUserListDataSourceToUserListRemoteDataSource(
         retrofitUserListDataSource: RetrofitUserListDataSource
     ): UserListRemoteDataSource
 
-    @Suppress("FunctionName")
     @Binds
-    fun bindUsersRepository_to_UsersListRepository(
+    fun bindUsersRepositoryToUsersListRepository(
         usersListRepository: UsersListRepository
     ): UsersRepository
 }
