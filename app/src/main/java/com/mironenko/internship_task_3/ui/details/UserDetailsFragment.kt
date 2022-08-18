@@ -7,28 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.mironenko.internship_task_3.R
-import com.mironenko.internship_task_3.UserApp
 import com.mironenko.internship_task_3.base.BaseFragment
 import com.mironenko.internship_task_3.databinding.FragmentUserDetailsBinding
 import com.mironenko.internship_task_3.util.ARG_USER_ID
-import com.mironenko.internship_task_3.util.factory.UserDetailsViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class UserDetailsFragment : BaseFragment<FragmentUserDetailsBinding>() {
-    private val viewModel: UserDetailsViewModel by viewModels {
-        UserDetailsViewModelFactory(
-            requireContext().applicationContext as UserApp,
-            userId
-        )
-    }
+    private val viewModel: UserDetailsViewModel by viewModels()
 
     override val viewBindingProvider: (LayoutInflater, ViewGroup?) -> FragmentUserDetailsBinding =
         { inflater, container ->
             FragmentUserDetailsBinding.inflate(inflater, container, false)
         }
-
-    private val userId by lazy {
-        arguments?.getString(ARG_USER_ID, "") ?: ""
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

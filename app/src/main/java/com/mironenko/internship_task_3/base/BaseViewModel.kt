@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-abstract class BaseViewModel<State, Action>(
+abstract class BaseViewModel<State : UserState, Action : UserAction>(
     private val interactors: Set<Interactor<State, Action>>,
     private val reducer: Reducer<State, Action>
 ) : ViewModel() {

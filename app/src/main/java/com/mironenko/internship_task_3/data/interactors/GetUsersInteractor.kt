@@ -4,8 +4,9 @@ import com.mironenko.internship_task_3.base.Interactor
 import com.mironenko.internship_task_3.data.UsersRepository
 import com.mironenko.internship_task_3.ui.list.UserListAction
 import com.mironenko.internship_task_3.ui.list.UserListState
+import javax.inject.Inject
 
-class GetUsersInteractor(
+class GetUsersInteractor @Inject constructor(
     private val repository: UsersRepository
 ) :
     Interactor<UserListState, UserListAction> {
@@ -21,5 +22,4 @@ class GetUsersInteractor(
     override fun canHandle(action: UserListAction): Boolean {
         return action is UserListAction.LoadUsers
     }
-
 }
