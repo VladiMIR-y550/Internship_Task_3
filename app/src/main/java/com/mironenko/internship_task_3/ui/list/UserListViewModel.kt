@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserListViewModel @Inject constructor(
-    interactors: Set<GetUsersInteractor>,
+    interactors: Set<@JvmSuppressWildcards GetUsersInteractor>,
 ) : BaseViewModel<UserListState, UserListAction>(
     interactors = interactors,
     reducer = UserListReducer()

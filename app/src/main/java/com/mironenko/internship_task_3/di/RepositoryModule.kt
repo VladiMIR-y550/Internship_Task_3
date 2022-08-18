@@ -44,6 +44,6 @@ class RepositoryModule {
         localDataSource: UserListLocalDataSource,
         mapper: EntityMapper<UserResponse, UserDbEntity, User>
     ): UsersListRepository {
-        return UsersListRepository.getInstance(remoteDataSource, localDataSource, mapper)!!
+        return UsersListRepository(remoteDataSource, localDataSource, mapper)
     }
 }

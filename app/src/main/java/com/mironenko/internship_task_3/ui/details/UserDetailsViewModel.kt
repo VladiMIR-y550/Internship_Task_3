@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailsViewModel @Inject constructor(
-    interactors: Set<GetUserByIdInteractor>,
+    interactors: Set<@JvmSuppressWildcards GetUserByIdInteractor>,
     savedStateHandle: SavedStateHandle
 ) : BaseViewModel<UserDetailState, UserDetailAction>(
     interactors = interactors,
