@@ -5,9 +5,9 @@ import com.mironenko.internship_task_3.data.model.local.room.UserDbEntity
 import com.mironenko.internship_task_3.data.model.remote.Id
 import com.mironenko.internship_task_3.data.model.remote.UserResponse
 import com.mironenko.internship_task_3.util.DateFormatter
-import java.util.*
 
-class UsersMapper : EntityMapper<UserResponse, UserDbEntity, User> {
+class UsersMapper(private val dateFormatter: DateFormatter) :
+    EntityMapper<UserResponse, UserDbEntity, User> {
     override fun dbEntityToUser(dbEntity: UserDbEntity): User {
         return User(
             id = dbEntity.id,
@@ -54,9 +54,11 @@ class UsersMapper : EntityMapper<UserResponse, UserDbEntity, User> {
             loginMd5 = responseEntity.login.md5,
             loginSha1 = responseEntity.login.sha1,
             loginSha256 = responseEntity.login.sha256,
-            dobDate = formatDate(responseEntity.dob.date),
+            dobDate = responseEntity.dob.date?.let { dateFormatter.stringDateFormat(it) },
             dobAge = responseEntity.dob.age,
-            registeredDate = formatDate(responseEntity.registered.date),
+            registeredDate = responseEntity.registered.date?.let {
+                dateFormatter.stringDateFormat(it)
+            },
             registeredAge = responseEntity.registered.age,
             phone = responseEntity.phone,
             cell = responseEntity.cell,
@@ -78,9 +80,4 @@ class UsersMapper : EntityMapper<UserResponse, UserDbEntity, User> {
     }
 
     private fun concatId(id: Id): String = "${id.name} ${id.value}"
-
-    private fun formatDate(date: String?): String {
-        val dateFromString = date?.let { DateFormatter.inputFormat.parse(it) } as Date
-        return DateFormatter.outputFormat.format(dateFromString)
-    }
 }

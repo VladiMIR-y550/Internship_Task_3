@@ -4,22 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mironenko.internship_task_3.R
-import com.mironenko.internship_task_3.UserApp
 import com.mironenko.internship_task_3.base.BaseFragment
 import com.mironenko.internship_task_3.data.User
 import com.mironenko.internship_task_3.databinding.FragmentUserListBinding
 import com.mironenko.internship_task_3.ui.details.UserDetailsFragment
-import com.mironenko.internship_task_3.util.factory.UserListViewModelFactory
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UserListFragment : BaseFragment<FragmentUserListBinding>() {
-    private val viewModel: UserListViewModel by viewModels {
-        UserListViewModelFactory(
-            application = requireContext().applicationContext as UserApp
-        )
-    }
+    private val viewModel by viewModel<UserListViewModel>()
 
     override val viewBindingProvider: (LayoutInflater, ViewGroup?) -> FragmentUserListBinding =
         { inflater, container ->
